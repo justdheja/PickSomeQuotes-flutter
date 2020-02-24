@@ -5,7 +5,8 @@ class QuoteCard extends StatelessWidget {
 
   final Quote quote;
   final Function delete;
-  QuoteCard({ this.quote, this.delete });
+  final Function pick;
+  QuoteCard({ this.quote, this.delete, this.pick });
 
   @override
   Widget build(BuildContext context) {
@@ -32,13 +33,24 @@ class QuoteCard extends StatelessWidget {
               ),
             ),
             SizedBox(height: 8.0,),
-            FlatButton.icon(
-              onPressed: delete,
-              label: Text('Delete Quote'),
-              icon: Icon(
-                Icons.delete
-              ),
-            )
+            Row(
+              children: <Widget>[
+                FlatButton.icon(
+                  onPressed: delete,
+                  label: Text('Delete Quote'),
+                  icon: Icon(
+                    Icons.delete
+                  ),
+                ),
+                FlatButton.icon(
+                  onPressed: pick,
+                  label: Text('Select'),
+                  icon: Icon(
+                    Icons.mouse
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),

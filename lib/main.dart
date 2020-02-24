@@ -24,6 +24,8 @@ class _QuoteListState extends State<QuoteList> {
     return QuoteCard(quote: quote);
   }
 
+  String selectedQuote;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,18 +35,31 @@ class _QuoteListState extends State<QuoteList> {
         centerTitle: true,
         backgroundColor: Colors.redAccent,
       ),
-      body: Column(
-        children: quotes.map((quote) {
-          return QuoteCard(
-            quote: quote,
-            delete: () {
-              setState(() {
-                quotes.remove(quote);
-              });
-            }
-          );
-        }).toList(),
-      )
+      body: Center(
+        child: Column(
+          children: <Widget>[
+            SizedBox(height: 10.0,),
+            Text('Selected Quote = $selectedQuote'),
+            Column(
+              children: quotes.map((quote) {
+                return QuoteCard(
+                  quote: quote,
+                  delete: () {
+                    setState(() {
+                      quotes.remove(quote);
+                    });
+                  },
+                  pick: () {
+                    setState(() {
+                      this.selectedQuote = quote.text;
+                    });
+                  }
+                );
+              }).toList(),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
